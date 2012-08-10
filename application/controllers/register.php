@@ -4,6 +4,6 @@ class Register extends CI_Controller {
 
 	public function index()
 	{
-		$this->loadview->path('register.html');
+		$this->loadview->path('register.html',array('title'=>'注册'));
 	}
 }
