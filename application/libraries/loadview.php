@@ -13,6 +13,6 @@ class Loadview {
         if (!$CI->agent->is_mobile()) {
             $view = 'pc/' . $view;
         }
-        $CI->parser->parse($view, $vars, $return);
+        $CI->load->view($view, $vars, $return);
     }
 }
