@@ -7,3 +7,4 @@ CREATE TABLE `admin` (
     PRIMARY KEY (`id`),
     UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+insert into admin (name,password) values ('pktangyue','f4be50f49d25982f4acdd1a98d51b4e0');
