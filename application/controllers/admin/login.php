@@ -10,6 +10,7 @@ class Login extends Base {
     public function __construct() {
         parent::__construct();
         $this->load->helper('cookie');
+        $this->load->model('admin_model');
     }
     
     public function index() {
@@ -27,6 +28,14 @@ class Login extends Base {
         if (!$is_auto_login) {
             return;
         }
+        $name = $this->input->cookie('zaocan_name', true);
+        $token = $this->input->cookie('zaocan_token', true);
+        if ($this->admin_model->check_admin_by_token($name, $token)) {
+            $this->session->set_userdata(array(
+                'name' => $name
+            ));
+            $this->_login_redirect();
+        }
     }
     
     protected function _handler_login() {
@@ -35,13 +44,14 @@ class Login extends Base {
         }
         $name = $this->input->post('name');
         $password = $this->input->post('password');
-        $is_auto_login = $this->input->post('is_auto_login');
-        $this->load->model('admin_model');
+        if (!$name || !$password) {
+            return;
+        }
         if ($this->admin_model->check_admin($name, $password)) {
             $this->session->set_userdata(array(
                 'name' => $name
             ));
-            $this->_update_cookie($is_auto_login);
+            $this->_update_cookie($name, $this->input->post('is_auto_login'));
             $this->_login_redirect();
         }
         else {
@@ -49,7 +59,7 @@ class Login extends Base {
         }
     }
     
-    protected function _update_cookie($is_auto_login) {
+    protected function _update_cookie($name, $is_auto_login) {
         $cookie = array(
             'name' => 'autologin',
             'expire' => 86400 * 30,
@@ -57,6 +67,25 @@ class Login extends Base {
         );
         $cookie['value'] = $is_auto_login ? true : false;
         $this->input->set_cookie($cookie);
+        $this->input->set_cookie(array(
+            'name' => 'name',
+            'value' => $name,
+            'expire' => 86400 * 30,
+            'prefix' => 'zaocan_'
+        ));
+        if ($is_auto_login) {
+            $this->_set_login_token($name);
+        }
+    }
+    
+    protected function _set_login_token($name) {
+        $token = $this->admin_model->update_token($name);
+        $this->input->set_cookie(array(
+            'name' => 'token',
+            'value' => $token,
+            'expire' => 86400 * 30,
+            'prefix' => 'zaocan_'
+        ));
     }
     
     protected function _display() {

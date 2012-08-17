@@ -7,12 +7,10 @@ class Base extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->helper('url');
+        $this->admin_name = $this->session->userdata('name');
     }
     
     protected function _is_logined() {
-        if (!$this->admin_name) {
-            $this->admin_name = $this->session->userdata('name');
-        }
         return !!$this->admin_name;
     }
     
