@@ -4,7 +4,7 @@ CREATE TABLE `user` (
     `phone` int(11) NOT NULL,
     `name` varchar(16) DEFAULT NULL,
     `password` varchar(32) DEFAULT NULL,
-    `token` varchar(32) DEFAULT NULL
+    `token` varchar(128) DEFAULT NULL
     `is_register` bit(1) DEFAULT b'0',
     `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
