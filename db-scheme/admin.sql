@@ -4,7 +4,7 @@ CREATE TABLE `admin` (
     `name` varchar(16) NOT NULL,
     `password` varchar(32) NOT NULL,
     `token` varchar(32) DEFAULT NULL,
-    `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
