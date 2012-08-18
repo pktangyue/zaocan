@@ -4,15 +4,15 @@ require ('base.php');
 class Loginout extends Base {
     
     public function index() {
-        echo $this->admin_name;
-        $this->load->model('admin_model');
-        $this->admin_model->delete_token($this->admin_name);
+        $this->load->model('admin_token_model', 'token_model');
+        $series = $this->input->cookie('zaocan_series', true);
+        $this->token_model->delete_token($this->get_admin_id() , $series);
         $this->_delete_cookie();
         $this->session->sess_destroy();
         redirect('/admin/login');
     }
     
-    protected function _delete_cookie() {
+    private function _delete_cookie() {
         $this->input->set_cookie(array(
             'name' => 'autologin',
             'value' => '',
@@ -21,6 +21,12 @@ class Loginout extends Base {
         ));
         $this->input->set_cookie(array(
             'name' => 'token',
+            'value' => '',
+            'expire' => 0,
+            'prefix' => 'zaocan_'
+        ));
+        $this->input->set_cookie(array(
+            'name' => 'series',
             'value' => '',
             'expire' => 0,
             'prefix' => 'zaocan_'

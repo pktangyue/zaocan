@@ -10,11 +10,11 @@ class Login extends Base {
     public function __construct() {
         parent::__construct();
         $this->load->helper('cookie');
-        $this->load->model('admin_model');
+        $this->load->model('admin_token_model', 'token_model');
     }
     
     public function index() {
-        if ($this->_is_logined()) {
+        if ($this->is_logined()) {
             $this->_login_redirect();
             return;
         }
@@ -23,23 +23,23 @@ class Login extends Base {
         $this->_display();
     }
     
-    protected function _handler_auto_login() {
+    private function _handler_auto_login() {
         $is_auto_login = $this->input->cookie('zaocan_autologin', true);
         if (!$is_auto_login) {
             return;
         }
         $name = $this->input->cookie('zaocan_name', true);
+        $series = $this->input->cookie('zaocan_series', true);
         $token = $this->input->cookie('zaocan_token', true);
-        if ($this->admin_model->check_admin_by_token($name, $token)) {
-            $this->session->set_userdata(array(
-                'name' => $name
-            ));
+        if ($this->token_model->check_token($this->get_admin_id($name) , $series, $token)) {
+            $this->_update_login_token($this->get_admin_id($name) , $series);
+            $this->set_logined_with_name($name);
             $this->_login_redirect();
         }
     }
     
-    protected function _handler_login() {
-        if (!$this->input->post('submit') == 'login' || $this->_is_logined()) {
+    private function _handler_login() {
+        if (!$this->input->post('submit') == 'login' || $this->is_logined()) {
             return;
         }
         $name = $this->input->post('name');
@@ -47,11 +47,10 @@ class Login extends Base {
         if (!$name || !$password) {
             return;
         }
+        $this->load->model('admin_model');
         if ($this->admin_model->check_admin($name, $password)) {
-            $this->session->set_userdata(array(
-                'name' => $name
-            ));
-            $this->_update_cookie($name, $this->input->post('is_auto_login'));
+            $this->_update_cookie($this->input->post('is_auto_login') , $name);
+            $this->set_logined_with_name($name);
             $this->_login_redirect();
         }
         else {
@@ -59,7 +58,7 @@ class Login extends Base {
         }
     }
     
-    protected function _update_cookie($name, $is_auto_login) {
+    private function _update_cookie($is_auto_login, $name) {
         $cookie = array(
             'name' => 'autologin',
             'expire' => 86400 * 30,
@@ -74,12 +73,28 @@ class Login extends Base {
             'prefix' => 'zaocan_'
         ));
         if ($is_auto_login) {
-            $this->_set_login_token($name);
+            $this->_add_login_token($this->get_admin_id($name));
         }
     }
     
-    protected function _set_login_token($name) {
-        $token = $this->admin_model->update_token($name);
+    private function _add_login_token($admin_id) {
+        $result = $this->token_model->add_token($admin_id);
+        $this->input->set_cookie(array(
+            'name' => 'token',
+            'value' => $result['token'],
+            'expire' => 86400 * 30,
+            'prefix' => 'zaocan_'
+        ));
+        $this->input->set_cookie(array(
+            'name' => 'series',
+            'value' => $result['series'],
+            'expire' => 86400 * 30,
+            'prefix' => 'zaocan_'
+        ));
+    }
+    
+    private function _update_login_token($uid, $series) {
+        $token = $this->token_model->update_token($uid, $series);
         $this->input->set_cookie(array(
             'name' => 'token',
             'value' => $token,
@@ -88,12 +103,12 @@ class Login extends Base {
         ));
     }
     
-    protected function _display() {
+    private function _display() {
         $this->params['title'] = '管理员登录';
         $this->loadview->path('admin/login', $this->params);
     }
     
-    protected function _login_redirect() {
+    private function _login_redirect() {
         $this->load->helper('url');
         $redirect_url = urldecode($this->input->get('redirect_url'));
         redirect($redirect_url ? $redirect_url : $this->default_url);
