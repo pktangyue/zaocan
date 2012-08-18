@@ -3,7 +3,6 @@ CREATE TABLE `admin` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `name` varchar(16) NOT NULL,
     `password` varchar(32) NOT NULL,
-    `token` varchar(128) DEFAULT NULL,
     `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     UNIQUE KEY `name` (`name`)
