@@ -3,33 +3,19 @@ require ('base.php');
 
 class Loginout extends Base {
     
-    public function index() {
+    public function __construct() {
+        parent::__construct();
+        $this->load->helper('cookie');
         $this->load->model('admin_token_model', 'token_model');
-        $series = $this->input->cookie('zaocan_series', true);
-        $this->token_model->delete_token($this->get_admin_id() , $series);
-        $this->_delete_cookie();
-        $this->session->sess_destroy();
-        redirect('/admin/login');
     }
     
-    private function _delete_cookie() {
-        $this->input->set_cookie(array(
-            'name' => 'autologin',
-            'value' => '',
-            'expire' => 0,
-            'prefix' => 'zaocan_'
-        ));
-        $this->input->set_cookie(array(
-            'name' => 'token',
-            'value' => '',
-            'expire' => 0,
-            'prefix' => 'zaocan_'
-        ));
-        $this->input->set_cookie(array(
-            'name' => 'series',
-            'value' => '',
-            'expire' => 0,
-            'prefix' => 'zaocan_'
-        ));
+    public function index() {
+        $series = get_cookie('zaocan_series', true);
+        $this->token_model->delete_token($this->get_admin_id() , $series);
+        delete_cookie('autologin');
+        delete_cookie('token');
+        delete_cookie('series');
+        $this->session->sess_destroy();
+        redirect('/admin/login');
     }
 }
