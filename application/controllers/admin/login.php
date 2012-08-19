@@ -81,12 +81,13 @@ class Login extends Base {
     
     private function _display() {
         $this->params['title'] = '管理员登录';
+        $this->params['redirect_url'] = $this->input->get('redirect_url');
         $this->loadview->path('admin/login', $this->params);
     }
     
     private function _login_redirect() {
         $this->load->helper('url');
-        $redirect_url = urldecode($this->input->get('redirect_url'));
+        $redirect_url = urldecode($this->input->post('redirect_url'));
         redirect($redirect_url ? $redirect_url : $this->default_url);
     }
 }

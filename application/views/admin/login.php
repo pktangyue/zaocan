@@ -27,6 +27,7 @@
     <br/>
     <input type="submit" id="J_login" class="btn btn-primary btn-large" value="提交" data-loading-text="登录中..." />
     <input type="hidden" name="submit" value="login" />
+    <input type="hidden" name="redirect_url" value="<?php echo $redirect_url; ?>" />
 </form>
 <script>
 $(function(){

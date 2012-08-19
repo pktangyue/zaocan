@@ -8,9 +8,14 @@ class Base extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
-        $this->load->helper('url');
         $this->admin_name = $this->session->userdata('name');
-        echo $this->admin_name;
+        $this->check_login();
+    }
+    
+    public function index() {
+        $this->loadview->path('admin/index', array(
+            'title' => '管理员首页'
+        ));
     }
     
     protected function is_logined() {
@@ -18,7 +23,8 @@ class Base extends CI_Controller {
     }
     
     protected function check_login() {
-        if (!$this->is_logined() && uri_string() != 'admin/login') {
+        $this->load->helper('url');
+        if (!$this->is_logined() && uri_string() != 'admin/login' && uri_string() != 'admin/loginout') {
             redirect('admin/login?redirect_url=' . urlencode(current_url()));
         }
         return;
@@ -28,7 +34,6 @@ class Base extends CI_Controller {
         if (!$name) {
             throw new Exception('login failed');
         }
-        echo 'here';
         $this->session->set_userdata(array(
             'name' => $name
         ));
