@@ -6,6 +6,8 @@ class Base extends CI_Controller {
     
     private $admin_id;
     
+    protected $params = array();
+    
     public function __construct() {
         parent::__construct();
         $this->admin_name = $this->session->userdata('name');

@@ -3,8 +3,6 @@ require ('base.php');
 
 class Login extends Base {
     
-    private $params = array();
-    
     private $default_url = '/admin';
     
     private $expire = 2592000;

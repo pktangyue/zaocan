@@ -3,8 +3,6 @@ require ('base.php');
 
 class Goods extends Base {
     
-    private $params = array();
-    
     public function __construct() {
         parent::__construct();
         $this->load->model('goods_model');
