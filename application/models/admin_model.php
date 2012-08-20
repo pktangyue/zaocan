@@ -18,8 +18,17 @@ class Admin_model extends CI_Model {
         if (!$name) {
             return;
         }
-        $this->db->select('id');
-        $query = $this->db->get($this->table);
-        return $query->row()->id;
+        $this->db->select('id')->where('name', $name);
+        $row = $this->db->get($this->table)->row();
+        return $row ? $row->id : '';
+    }
+    
+    public function change_password($name, $password) {
+        $this->load->helper('security');
+        $this->db->update($this->table, array(
+            'password' => do_hash($password, 'md5')
+        ) , array(
+            'name' => $name
+        ));
     }
 }
