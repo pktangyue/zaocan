@@ -12,7 +12,7 @@ class Goods extends Base {
         $query = $this->input->get('query');
         $this->params['title'] = '产品管理';
         $this->params['error'] = $this->input->get('error');
-        $this->params['list'] = $this->goods_model->get_list($query);
+        $this->params['list'] = $this->goods_model->get_all($query);
         $this->loadview->path('admin/goods', $this->params);
     }
     
@@ -22,8 +22,8 @@ class Goods extends Base {
         if (!$name || !$price || !preg_match('/^\d+(.\d{0,2})?$/', $price)) {
             $error = '输入的名称或价格有误！';
         }
-        else {
-            $this->goods_model->add_goods($name, $price);
+        else if (!$this->goods_model->add_goods($name, $price)) {
+            $error = '输入的名称已经存在！';
         }
         $this->load->helper('url');
         $url = '/admin/goods' . (isset($error) ? '?error=' . $error : '');
@@ -46,5 +46,12 @@ class Goods extends Base {
             return '没有此产品';
         }
         $this->goods_model->delete_goods($id);
+    }
+    
+    public function recover($id) {
+        if (!$id) {
+            return '没有此产品';
+        }
+        $this->goods_model->recover_goods($id);
     }
 }

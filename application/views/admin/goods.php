@@ -1,4 +1,7 @@
 <?php include_once (APPPATH . 'views/common/header.php'); ?>
+<style>
+    .disappear{display:none;}
+</style>
 <?php if (($error)): ?>
 <div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><span><?php echo $error; ?></span></div>
 <?php endif; ?>
@@ -28,7 +31,7 @@
                     <tr>
                         <td>
                             <?php echo ++$i; ?>
-                            <input type="hidden" name="id" class="hide" value="<?php echo $item->id;?>" />
+                            <input type="hidden" name="id" class="hide" value="<?php echo $item->id; ?>" />
                         </td>
                         <td>
                             <span><?php echo $item->name; ?></span>
@@ -39,10 +42,30 @@
                             <input type="number" name="price" class="hide input-mini" />
                         </td>
                         <td>
-                            <a href="javascript:void(0);" class="edit btn"><i class="icon-edit"></i>编辑</a>
-                            <a href="javascript:void(0);" class="delete btn btn-danger"><i class="icon-trash icon-white"></i>删除</a>
-                            <a href="javascript:void(0);" class="save btn btn-primary hide"><i class="icon-ok icon-white"></i>保存</a>
-                            <a href="javascript:void(0);" class="cancel btn hide"><i class="icon-remove"></i>取消</a>
+                            <a href="javascript:void(0);" class="edit btn">
+                                <i class="icon-edit"></i>
+                                编辑
+                            </a>
+                            <a href="javascript:void(0);" class="delete btn btn-danger <?php if ($item->is_delete) {
+        echo 'disappear';
+    } ?>">
+                                <i class="icon-trash icon-white"></i>
+                                删除
+                            </a>
+                            <a href="javascript:void(0);" class="recover btn btn-success <?php if (!$item->is_delete) {
+        echo 'disappear';
+    } ?>">
+                                <i class="icon-repeat icon-white"></i>
+                                恢复
+                            </a>
+                            <a href="javascript:void(0);" class="save btn btn-primary hide">
+                                <i class="icon-ok icon-white"></i>
+                                保存
+                            </a>
+                            <a href="javascript:void(0);" class="cancel btn hide">
+                                <i class="icon-remove"></i>
+                                取消
+                            </a>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -77,18 +100,27 @@ $(function(){
             var $tr = $this.parent().parent();
             show_edit($tr);
         });
+        $table.on('click','.recover',function(){
+            var $this = $(this);
+            var $tr = $this.parent().parent();
+            $.get('/admin/goods/recover/'+get_id($tr),function(result){
+                if(result){
+                    alert(result);
+                }else{
+                    $this.addClass('disappear').prev().removeClass('disappear');
+                }
+            });
+        });
         $table.on('click','.delete',function(){
             var $this = $(this);
             var $tr = $this.parent().parent();
-            if(confirm('是否确认删除产品“'+get_name($tr)+'”?')){
-                $.get('/admin/goods/delete/'+get_id($tr),function(result){
-                    if(result){
-                        alert(result);
-                    }else{
-                        $this.parent().parent().remove();
-                    }
-                });
-            }
+            $.get('/admin/goods/delete/'+get_id($tr),function(result){
+                if(result){
+                    alert(result);
+                }else{
+                    $this.addClass('disappear').next().removeClass('disappear');
+                }
+            });
         });
         $table.on('click','.save',function(){
             var $this= $(this);
@@ -129,7 +161,7 @@ $(function(){
                     $input.val(this.innerHTML);
                 }
             });
-            $tr.find('.edit,.delete').addClass('hide');
+            $tr.find('.edit,.delete,.recover').addClass('hide');
             $tr.find('input').show();
             $tr.find('.save,.cancel').removeClass('hide');
         }
@@ -137,7 +169,7 @@ $(function(){
             $tr.find('input').hide();
             $tr.find('.save,.cancel').addClass('hide');
             $tr.find('span').show();
-            $tr.find('.edit,.delete').removeClass('hide');
+            $tr.find('.edit,.delete,.recover').removeClass('hide');
         }
         function get_id ( $tr ) {
             return $tr.find('input[name="id"]').val();
