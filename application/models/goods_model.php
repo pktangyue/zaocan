@@ -4,13 +4,14 @@ class Goods_model extends CI_Model {
     
     private $table = 'goods';
     
-    public function add_goods($name, $price) {
+    public function add_goods($name, $price, $is_set = false) {
         if ($this->is_exist($name)) {
             return;
         }
         $this->db->insert($this->table, array(
             'name' => $name,
-            'price' => $price
+            'price' => $price,
+            'is_set' => $is_set
         ));
         $this->db->select('id')->where('id = last_insert_id()');
         $row = $this->db->get($this->table)->row();
@@ -47,19 +48,17 @@ class Goods_model extends CI_Model {
         ));
     }
     
-    public function get_all($query = '', $is_delete = NULL) {
-        $this->db->select('id,name,price,is_set,is_delete')->order_by('name');
+    public function get_all($query = '', $is_set = NULL, $is_delete = NULL) {
+        $this->db->select('id,name,price,is_set,is_delete');
+        if (isset($is_set)) {
+            $this->db->where('is_set', $is_set);
+        }
         if (isset($is_delete)) {
             $this->db->where('is_delete', $is_delete);
         }
         if ($query) {
             $this->db->like('name', $query);
         }
-        $query = $this->db->get($this->table);
-        return $query->result();
-    }
-    
-    public function get_list($query = '') {
-        return $this->get_all($query, false);
+        return $this->db->get($this->table)->result();
     }
 }
