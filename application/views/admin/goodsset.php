@@ -15,10 +15,12 @@
             <div class="accordion" id="accordion">
                 <?php $i = 0;?>
                 <?php foreach ($sets_list as $set): ?>
-                <div class="accordion-group">
+                <div class="accordion-group" data-id="<?php echo $set->id;?>">
                     <div class="accordion-heading">
                         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo ++$i;?>">
                             <?php echo $set->name;?>
+                            ：
+                            ￥<?php echo $set->price;?>
                         </a>
                     </div>
                     <div id="collapse<?php echo $i;?>" class="accordion-body collapse">
@@ -97,29 +99,6 @@
 </div>
 <script>
 $(function(){
-    $('.control-group').find('input').blur(function(){
-        var $this= $(this);
-        if (!$this.val()){
-            $this.parents('.control-group').addClass('error');
-        }
-    }).focus(function(){
-        $(this).parents('.control-group').removeClass('error');
-    });
-    $('.btn-group').on('click',function(e){
-        if(e.target.tagName !== 'A'){
-            return;
-        }
-        var $this = $(this);
-        var $button = $this.find('button');
-        if(e.target.className === 'remove'){
-            $button.data('num','').removeClass('btn-success');
-            $this.find('span.num').html('');
-        }else{
-            var num = $(e.target).html();
-            $button.data('num',num).addClass('btn-success');
-            $this.find('span.num').html(' x ' + num);
-        }
-    });
     var add = function(){
         var $add = $('#add');
         $('#J_ok').on('click',function(e){
@@ -151,6 +130,49 @@ $(function(){
             $add.find('input[name="name"],input[name="price"]').val('');
         });
     }();
+    var list = function(){
+        var $list = $('#list');
+        $list.find('.btn-group').on('click',function(e){
+            if(e.target.tagName !== 'A'){
+                return;
+            }
+            var $this = $(this);
+            var num = $this.find('button').data('num');
+            var number = parseInt($(e.target).html()) || '';
+            if(num === number){
+                return;
+            }
+            var cid = $this.find('button').data('id');
+            var pid = $this.closest('.accordion-group').data('id');
+            $.get('/admin/goodsset/update', { pid : pid, cid : cid, number : number });
+        });
+    }();
+    $('.control-group').find('input').blur(function(){
+        var $this= $(this);
+        if (!$this.val()){
+            $this.parents('.control-group').addClass('error');
+        }
+    }).focus(function(){
+        $(this).parents('.control-group').removeClass('error');
+    });
+    $('.btn-group').on('click',function(e){
+        if(e.target.tagName !== 'A'){
+            return;
+        }
+        var $this = $(this);
+        var $button = $this.find('button');
+        var num = parseInt($(e.target).html()) || '';
+        if(num === $button.data('num')){
+            return;
+        }
+        if(e.target.className === 'remove'){
+            $button.data('num','').removeClass('btn-success');
+            $this.find('span.num').html('');
+        }else{
+            $button.data('num',num).addClass('btn-success');
+            $this.find('span.num').html(' x ' + num);
+        }
+    });
 });
 </script>
 <?php include_once (APPPATH . 'views/common/footer.php'); ?>

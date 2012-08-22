@@ -39,8 +39,34 @@ class Goods_set_model extends CI_Model {
             return;
         }
         $this->db->join($this->join_table, $this->table . '.cid = ' . $this->join_table . '.id');
-        $this->db->select('id,name,price,number')->where('pid', $pid);
+        $this->db->select('id,name,price,number')->where('pid', $pid)->where('number > 0');
         $this->db->where($this->join_table . '.is_delete', false);
         return $this->db->get($this->table)->result();
+    }
+    
+    public function update_item($pid, $cid, $number = 0) {
+        if ($this->is_exist($pid, $cid)) {
+            $this->db->update($this->table, array(
+                'number' => $number
+            ) , array(
+                'pid' => $pid,
+                'cid' => $cid
+            ));
+        }
+        else {
+            $this->db->insert($this->table, array(
+                'pid' => $pid,
+                'cid' => $cid,
+                'number' => $number
+            ));
+        }
+    }
+    
+    public function is_exist($pid, $cid) {
+        $this->db->from($this->table)->where(array(
+            'pid' => $pid,
+            'cid' => $cid
+        ));
+        return $this->db->count_all_results() == 0 ? False : True;
     }
 }

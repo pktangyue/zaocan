@@ -29,7 +29,17 @@ class Goodsset extends Base {
         redirect($url);
     }
     
-    public function _set_params() {
+    public function update() {
+        $pid = $this->input->get('pid');
+        $cid = $this->input->get('cid');
+        $number = $this->input->get('number');
+        if (!$pid || !$cid) {
+            return;
+        }
+        $this->set_model->update_item($pid, $cid, $number ? $number : 0);
+    }
+    
+    private function _set_params() {
         $goods_list = $this->goods_model->get_all('', false, false);
         $sets_list = $this->goods_model->get_all('', true);
         foreach ($sets_list as $item) {
