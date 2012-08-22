@@ -1,8 +1,5 @@
 <?php include_once (APPPATH . 'views/common/header.php'); ?>
 <form action="/admin/login" method="post">
-    <?php if (isset($error)) { ?>
-    <div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><span><?php echo $error; ?></span></div>
-    <?php } ?>
     <div class="control-group">
         <label class="control-label">用户名</label>
         <div class="controls">

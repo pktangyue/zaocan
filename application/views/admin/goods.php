@@ -2,9 +2,6 @@
 <style>
     .disappear{display:none;}
 </style>
-<?php if (($error)): ?>
-<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><span><?php echo $error; ?></span></div>
-<?php endif; ?>
 <div class="tabbable">
     <ul class="nav nav-pills">
         <li class="active"><a href="#list" data-toggle="pill">产品列表</a></li>
@@ -22,7 +19,7 @@
                         <th>#</th>
                         <th>名称</th>
                         <th>价格</th>
-                        <th width="135px">操作</th>
+                        <th width="140px">操作</th>
                     </tr>
                 </thead>
                 <tbody>

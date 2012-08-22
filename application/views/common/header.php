@@ -20,3 +20,6 @@
         </div>
         <div class="container">
             <div class="row-fluid">
+                <?php if (isset($error) && $error): ?>
+                <div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><span><?php echo $error; ?></span></div>
+                <?php endif; ?>

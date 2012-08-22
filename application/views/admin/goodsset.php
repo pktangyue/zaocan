@@ -1,7 +1,4 @@
 <?php include_once (APPPATH . 'views/common/header.php'); ?>
-<?php if (isset($error) && $error): ?>
-<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><span><?php echo $error; ?></span></div>
-<?php endif; ?>
 <style>
     .control-group{float:left;margin-left:10px;}
     .control-group:first-child{margin-left:0px;}
@@ -29,8 +26,8 @@
                             <div class="btn-toolbar">
                                 <?php foreach ($set->goods_list as $goods): ?>
                                 <div class="btn-group">
-                                    <button class="btn dropdown-toggle <?php echo $goods->number?'btn-success':'';?>" 
-                                        data-toggle="dropdown" 
+                                    <button class="btn dropdown-toggle <?php echo $goods->number?'btn-success':'';?>"
+                                        data-toggle="dropdown"
                                         data-id="<?php echo $goods->id; ?>"
                                         data-num="<?php echo $goods->number;?>" >
                                         <?php echo $goods->name; ?>

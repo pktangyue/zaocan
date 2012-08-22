@@ -1,8 +1,5 @@
 <?php include_once (APPPATH . 'views/common/header.php'); ?>
 <form action="/admin/password" method="post">
-    <?php if (isset($error)): ?>
-    <div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><span><?php echo $error; ?></span></div>
-    <?php endif; ?>
     <?php if (isset($success)): ?>
     <div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span><?php echo $success; ?></span></div>
     <?php endif; ?>
