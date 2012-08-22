@@ -1,9 +1,7 @@
 <?php include_once (APPPATH . 'views/common/header.php'); ?>
 <style>
-    .control-group{float:left;margin-left:10px;}
+    .control-group{float:left;margin-left:20px;}
     .control-group:first-child{margin-left:0px;}
-    .form-horizontal .control-label{width:100px;}
-    .form-horizontal .controls{margin-left:120px;}
 </style>
 <div class="tabbable">
     <ul class="nav nav-pills">
