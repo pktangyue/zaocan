@@ -7,6 +7,7 @@ class Goodsset extends Base {
         parent::__construct();
         $this->load->model('goods_model');
         $this->load->model('goods_set_model', 'set_model');
+        $this->set_back_btn();
     }
     
     public function index() {

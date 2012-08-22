@@ -15,9 +15,8 @@ class Base extends CI_Controller {
     }
     
     public function index() {
-        $this->loadview->path('admin/index', array(
-            'title' => '管理员首页'
-        ));
+        $this->params['title'] = '管理员首页';
+        $this->loadview->path('admin/index', $this->params);
     }
     
     protected function is_logined() {
@@ -53,5 +52,9 @@ class Base extends CI_Controller {
             $this->admin_id = $this->admin_model->get_id_by_name($name);
         }
         return $this->admin_id;
+    }
+    
+    protected function set_back_btn() {
+        $this->params['left_header_btn'] = '<a href="/admin" class="pull-left btn"> <i class="icon-chevron-left"></i> 返回 </a>';
     }
 }

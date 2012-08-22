@@ -6,6 +6,7 @@ class Goods extends Base {
     public function __construct() {
         parent::__construct();
         $this->load->model('goods_model');
+        $this->set_back_btn();
     }
     
     public function index() {

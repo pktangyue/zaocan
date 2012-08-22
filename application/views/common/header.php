@@ -14,6 +14,8 @@
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
+                    <?php echo isset($left_header_btn) ? $left_header_btn : ''; ?>
+                    <?php echo isset($right_header_btn) ? $right_header_btn : ''; ?>
                     <a class="brand" href="#"><?php echo $title; ?></a>
                 </div>
             </div>

@@ -1,1 +1,5 @@
 body{padding-top:55px;}
+.navbar-inner .container{text-align:center;}
+.navbar .brand{float:none;}
+.navbar-inner .pull-left{position:absolute;left:22px;}
+.navbar-inner .pull-right{position:absolute;right:22px;}
