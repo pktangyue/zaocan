@@ -1,5 +1,17 @@
 body{padding-top:55px;}
-.navbar-inner .container{text-align:center;}
-.navbar .brand{float:none;}
-.navbar-inner .pull-left{position:absolute;left:22px;}
-.navbar-inner .pull-right{position:absolute;right:22px;}
+/*navbar-fixed-top*/
+.navbar-fixed-top .container{text-align:center;}
+.navbar-fixed-top .brand{float:none;}
+.navbar-fixed-top .pull-left{position:absolute;left:22px;}
+.navbar-fixed-top .pull-right{position:absolute;right:22px;}
+/*navbar-fixed-bottom*/
+.navbar-fixed-bottom{font-size:14px;width:100%;line-height:26px;}
+.navbar-fixed-bottom td{vertical-align:bottom;padding:10px 10px 10px 0;}
+.navbar-fixed-bottom .order{margin-top:0;}
+/*goods*/
+.goods{width:100%;}
+.goods td{text-align:center;}
+.goods li{text-align:left;font-size:14px;}
+.goods .name{font-weight:bolder;font-size:20px;}
+.goods .price{color:#9d261d;}
+.goods .num{font-weight:bold;}

@@ -4,7 +4,7 @@ class Goods_set_model extends CI_Model {
     
     private $table = 'goods_set';
     
-    private $join_table = 'goods_set';
+    private $join_table = 'goods';
     
     public function add_some($id, $list) {
         if (!$id) {
