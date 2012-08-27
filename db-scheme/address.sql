@@ -5,6 +5,6 @@ CREATE TABLE `address` (
     `one` varchar(64) NOT NULL,
     `two` varchar(64) NOT NULL,
     `three` varchar(64) NOT NULL,
-    `is_current` bit(1) DEFAULT NULL,
+    `is_current` tinyint(1) DEFAULT '0',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
