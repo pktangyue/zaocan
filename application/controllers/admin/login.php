@@ -85,7 +85,7 @@ class Login extends Base {
     
     private function _login_redirect() {
         $this->load->helper('url');
-        $redirect_url = urldecode($this->input->post('redirect_url'));
+        $redirect_url = urldecode($this->input->get_post('redirect_url'));
         redirect($redirect_url ? $redirect_url : $this->default_url);
     }
 }
