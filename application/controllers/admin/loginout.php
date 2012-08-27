@@ -10,11 +10,11 @@ class Loginout extends Base {
     }
     
     public function index() {
-        $series = get_cookie('zaocan_series', true);
+        $series = get_cookie('admin_series', true);
         $this->token_model->delete_token($this->get_admin_id() , $series);
-        delete_cookie('autologin');
-        delete_cookie('token');
-        delete_cookie('series');
+        delete_cookie('admin_autologin');
+        delete_cookie('admin_token');
+        delete_cookie('admin_series');
         $this->session->sess_destroy();
         redirect('/admin/login');
     }

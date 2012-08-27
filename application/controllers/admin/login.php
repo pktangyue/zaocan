@@ -24,13 +24,13 @@ class Login extends Base {
     }
     
     private function _handler_auto_login() {
-        $is_auto_login = get_cookie('autologin', true);
+        $is_auto_login = get_cookie('admin_autologin', true);
         if (!$is_auto_login) {
             return;
         }
-        $name = get_cookie('name', true);
-        $series = get_cookie('zaocan_series', true);
-        $token = get_cookie('zaocan_token', true);
+        $name = get_cookie('admin_name', true);
+        $series = get_cookie('admin_series', true);
+        $token = get_cookie('admin_token', true);
         if ($this->token_model->check_token($this->get_admin_id($name) , $series, $token)) {
             $this->_update_login_token($this->get_admin_id($name) , $series);
             $this->set_logined_with_name($name);
@@ -59,8 +59,8 @@ class Login extends Base {
     }
     
     private function _update_cookie($is_auto_login, $name) {
-        set_cookie('autologin', $is_auto_login ? true : false, $this->expire);
-        set_cookie('name', $name, $this->expire);
+        set_cookie('admin_autologin', $is_auto_login ? true : false, $this->expire);
+        set_cookie('admin_name', $name, $this->expire);
         if ($is_auto_login) {
             $this->_add_login_token($this->get_admin_id($name));
         }
@@ -68,13 +68,13 @@ class Login extends Base {
     
     private function _add_login_token($admin_id) {
         $result = $this->token_model->add_token($admin_id);
-        set_cookie('token', $result['token'], $this->expire);
-        set_cookie('series', $result['series'], $this->expire);
+        set_cookie('admin_token', $result['token'], $this->expire);
+        set_cookie('admin_series', $result['series'], $this->expire);
     }
     
     private function _update_login_token($uid, $series) {
         $token = $this->token_model->update_token($uid, $series);
-        set_cookie('token', $token, $this->expire);
+        set_cookie('admin_token', $token, $this->expire);
     }
     
     private function _display() {
