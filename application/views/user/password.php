@@ -8,7 +8,7 @@
     </div>
     <br/>
     <div class="form-actions">
-        <input type="submit" id="J_submit" class="btn btn-primary btn-large" value="登录" />
+        <input type="submit" id="J_submit" class="btn btn-primary btn-large" value="登录" data-loading-text="登录中..." />
         <input type="hidden" name="submit" value="login"/>
     </div>
 </form>
@@ -32,7 +32,7 @@ $(function(){
                 has_empty = true;
             }
         });
-        return !has_empty;
+        return !has_empty ? $(this).button('loading') : false ;
     });
 });
 </script>

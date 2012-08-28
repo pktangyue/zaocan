@@ -37,7 +37,7 @@
     </div>
     <br/>
     <div class="form-actions">
-        <input type="submit" id="J_submit" class="btn btn-primary btn-large" value="确定" />
+        <input type="submit" id="J_submit" class="btn btn-primary btn-large" value="注册" data-loading-text="载入中..." />
         <input type="hidden" name="submit" value="register"/>
     </div>
 </form>
@@ -61,7 +61,7 @@ $(function(){
                 has_empty = true;
             }
         });
-        return !has_empty;
+        return !has_empty ? $(this).button('loading') : false ;
     });
 });
 </script>
