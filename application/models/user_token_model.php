@@ -1,9 +1,9 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-// same with User_token_model
+// same with Admin_token_model
 
-class Admin_token_model extends CI_Model {
+class User_token_model extends CI_Model {
     
-    private $table = 'admin_token';
+    private $table = 'user_token';
     
     public function check_token($uid, $series, $token) {
         if (!$uid || !$series || !$token) {

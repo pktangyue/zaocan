@@ -18,9 +18,10 @@ class Password extends Base {
         }
         $this->load->model('user_model');
         $password = $this->input->post('password');
-        $phone = get_cookie('user_phone');
+        $phone = get_cookie('user_phone', true);
         if ($this->user_model->check_user($phone, $password)) {
             $this->set_logined_with_phone($phone);
+            $this->set_auto_login_cookies($phone);
             redirect('/cart');
         }
         else {

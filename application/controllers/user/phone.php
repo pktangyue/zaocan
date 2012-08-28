@@ -8,9 +8,7 @@ class Phone extends Base {
             redirect('/cart');
         }
         $this->_handler_next();
-        $this->params['title'] = '设置手机号';
-        $this->params['phone'] = get_cookie('user_phone');
-        $this->loadview->path('user/phone', $this->params);
+        $this->_display();
     }
     
     private function _handler_next() {
@@ -26,5 +24,11 @@ class Phone extends Base {
         else {
             redirect('/user/register');
         }
+    }
+    
+    private function _display() {
+        $this->params['title'] = '设置手机号';
+        $this->params['phone'] = get_cookie('user_phone', true);
+        $this->loadview->path('user/phone', $this->params);
     }
 }

@@ -28,7 +28,7 @@ class Register extends Base {
         }
         $this->load->model('user_model');
         $this->load->model('address_model');
-        $phone = get_cookie('user_phone');
+        $phone = get_cookie('user_phone', true);
         $uid = $this->user_model->add_user($name, $phone, $password1);
         if (!$uid) {
             $this->params['error'] = '已经存在的手机号';
@@ -36,6 +36,7 @@ class Register extends Base {
         }
         $this->address_model->add_address($uid, $one, $two, $three);
         $this->set_logined_with_phone($phone);
+        $this->set_auto_login_cookies($phone);
         redirect('/cart');
     }
 }

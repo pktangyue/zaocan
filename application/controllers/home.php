@@ -1,6 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+require ('user/base.php');
 
-class Home extends CI_Controller {
+class Home extends Base {
     
     public function index() {
         $this->params['title'] = '订餐首页';
