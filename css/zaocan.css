@@ -8,6 +8,7 @@ body{padding-top:55px;}
 .navbar-fixed-bottom{font-size:14px;width:100%;line-height:26px;}
 .navbar-fixed-bottom td{vertical-align:bottom;padding:10px 10px 10px 0;}
 .navbar-fixed-bottom .order{margin-top:0;}
+.navbar-fixed-bottom form{margin-bottom:0;}
 /*goods*/
 .goods{width:100%;}
 .goods td{text-align:center;}

@@ -38,13 +38,18 @@
 <div id="J_bottom" class="navbar navbar-fixed-bottom hide">
     <div class="navbar-inner">
         <div class="container">
-            <table width="100%">
-                <tr>
-                    <td id="J_name"></td>
-                    <td width="110px"><span id="J_count">0</span>份总计：￥<span id="J_sum">0</span></td>
-                    <td width="65px"><a id="J_order" href="javascript:void(0);" class="btn pull-right order">下订单</a></td>
-                </tr>
-            </table>
+            <form action="/cart" method="post">
+                <table width="100%">
+                    <tr>
+                        <td id="J_name"></td>
+                        <td width="110px"><span id="J_count">0</span>份总计：￥<span id="J_sum">0</span></td>
+                        <td width="65px">
+                            <input id="J_order" type="submit" class="btn pull-right order" value="下订单"/>
+                            <input id="J_ids" type="hidden" name="ids" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
         </div>
     </div>
 </div>
@@ -55,6 +60,7 @@ $(function(){
     var $J_name = $('#J_name');
     var $J_count = $('#J_count');
     var $J_sum = $('#J_sum');
+    var $J_ids = $('#J_ids');
     $('table.goods').on('click','.btn',function(){
         var $this = $(this);
         orders.push({
@@ -68,15 +74,17 @@ $(function(){
         if( orders.length > 0){
             $J_bottom.removeClass('hide').prev().css('margin-bottom',$J_bottom.height() + 10);
         }
-        var names = [],count = 0,price = 0;
+        var names = [],count = 0,price = 0,ids=[];
         $.each(orders,function(i,v){
             names.push(v.name);
+            ids.push(v.id);
             count ++;
             price += v.price;
         });
         $J_name.html(names.join('/'));
         $J_count.html(count);
         $J_sum.html(price);
+        $J_ids.val(ids.join(';'));
     };
 });
 </script>
