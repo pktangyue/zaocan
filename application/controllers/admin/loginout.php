@@ -5,7 +5,6 @@ class Loginout extends Base {
     
     public function __construct() {
         parent::__construct();
-        $this->load->helper('cookie');
         $this->load->model('admin_token_model', 'token_model');
     }
     

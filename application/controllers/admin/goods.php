@@ -26,7 +26,6 @@ class Goods extends Base {
         else if (!$this->goods_model->add_goods($name, $price)) {
             $error = '输入的名称已经存在！';
         }
-        $this->load->helper('url');
         $url = '/admin/goods' . (isset($error) ? '?error=' . $error : '');
         redirect($url);
     }

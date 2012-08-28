@@ -8,6 +8,8 @@ class Base extends CI_Controller {
     
     protected $params = array();
     
+    protected $expire = 2592000;
+    
     public function __construct() {
         parent::__construct();
         $this->user_phone = $this->session->userdata('phone');
@@ -18,7 +20,6 @@ class Base extends CI_Controller {
     }
     
     protected function check_login() {
-        $this->load->helper('url');
         if (!$this->is_logined()) {
             redirect('/user/phone');
         }

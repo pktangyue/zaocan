@@ -24,7 +24,6 @@ class Base extends CI_Controller {
     }
     
     protected function check_login() {
-        $this->load->helper('url');
         if (!$this->is_logined() && uri_string() != 'admin/login' && uri_string() != 'admin/loginout') {
             redirect('admin/login?redirect_url=' . urlencode(current_url()));
         }

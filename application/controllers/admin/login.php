@@ -9,7 +9,6 @@ class Login extends Base {
     
     public function __construct() {
         parent::__construct();
-        $this->load->helper('cookie');
         $this->load->model('admin_token_model', 'token_model');
     }
     
@@ -84,7 +83,6 @@ class Login extends Base {
     }
     
     private function _login_redirect() {
-        $this->load->helper('url');
         $redirect_url = urldecode($this->input->get_post('redirect_url'));
         redirect($redirect_url ? $redirect_url : $this->default_url);
     }

@@ -5,7 +5,6 @@ class Register extends Base {
     
     public function index() {
         if ($this->is_logined()) {
-            $this->load->helper('url');
             redirect('/cart');
         }
         $this->_handler_register();
@@ -27,8 +26,6 @@ class Register extends Base {
             $this->params['error'] = '重复密码不一致';
             return;
         }
-        $this->load->helper('cookie');
-        $this->load->helper('url');
         $this->load->model('user_model');
         $this->load->model('address_model');
         $phone = get_cookie('user_phone');

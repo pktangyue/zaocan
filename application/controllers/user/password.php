@@ -3,11 +3,8 @@ require ('base.php');
 
 class Password extends Base {
     
-    private $expire = 2592000;
-    
     public function index() {
         if ($this->is_logined()) {
-            $this->load->helper('url');
             redirect('/cart');
         }
         $this->_handler_login();
@@ -20,8 +17,6 @@ class Password extends Base {
             return;
         }
         $this->load->model('user_model');
-        $this->load->helper('cookie');
-        $this->load->helper('url');
         $password = $this->input->post('password');
         $phone = get_cookie('user_phone');
         if ($this->user_model->check_user($phone, $password)) {
