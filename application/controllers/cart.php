@@ -9,6 +9,9 @@ class Cart extends Base {
     }
     
     private function _save_ids() {
-        set_cookie('goods_ids', $this->input->post('ids') , $this->expire);
+        $ids = $this->input->post('ids');
+        if ($ids) {
+            set_cookie('goods_ids', $this->input->post('ids') , $this->expire);
+        }
     }
 }
