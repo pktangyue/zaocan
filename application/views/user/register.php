@@ -6,14 +6,12 @@
             <input type="password" name="password1" class="span6" placeholder="请输入...">
         </div>
     </div>
-    <br/>
     <div class="control-group">
         <label class="control-label">重复密码</label>
         <div class="controls">
             <input type="password" name="password2" class="span6" placeholder="请输入...">
         </div>
     </div>
-    <br/>
     <div class="form-actions">
         <input type="submit" id="J_submit" class="btn btn-primary btn-large" value="注册" data-loading-text="载入中..." />
         <input type="hidden" name="submit" value="register"/>

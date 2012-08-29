@@ -1,12 +1,11 @@
-body{padding-top:55px;}
 /*navbar-fixed-top*/
 .navbar-fixed-top .container{text-align:center;}
 .navbar-fixed-top .brand{float:none;}
-.navbar-fixed-top .pull-left{position:absolute;left:22px;}
-.navbar-fixed-top .pull-right{position:absolute;right:22px;}
+.navbar-fixed-top .pull-left{position:absolute;left:20px;}
+.navbar-fixed-top .pull-right{position:absolute;right:20px;}
 /*navbar-fixed-bottom*/
-.navbar-fixed-bottom{font-size:14px;width:100%;line-height:26px;}
-.navbar-fixed-bottom td{vertical-align:bottom;padding:10px 10px 10px 0;}
+.navbar-fixed-bottom{position:fixed;margin-left:0;margin-right:0;}
+.navbar-fixed-bottom td{vertical-align:bottom;padding:5px 10px 5px 0;}
 .navbar-fixed-bottom .order{margin-top:0;}
 .navbar-fixed-bottom form{margin-bottom:0;}
 /*goods*/

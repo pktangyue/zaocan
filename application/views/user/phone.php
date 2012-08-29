@@ -1,12 +1,11 @@
 <?php include_once (APPPATH . 'views/common/header.php'); ?>
 <form method="post">
     <div class="control-group">
-        <label class="control-label"><h4>手机号：</h4></label>
+        <label class="control-label">手机号：</label>
         <div class="controls">
             <input type="text" name="phone" class="span6" placeholder="请输入手机号..." value="<?php echo isset($phone) ? $phone : ''; ?>" />
         </div>
     </div>
-    <br/>
     <div class="form-actions">
         <input type="submit" id="J_submit" class="btn btn-primary btn-large" value="确定" data-loading-text="载入中..." />
     </div>

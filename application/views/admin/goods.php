@@ -13,61 +13,59 @@
                 <input type="text" name="query" class="input-medium search-query">
                 <input type="submit" class="btn" value="搜索"/>
             </form>
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>名称</th>
-                        <th>价格</th>
-                        <th width="140px">操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $i = 0; ?>
-                    <?php foreach ($list as $item): ?>
-                    <tr>
-                        <td>
-                            <?php echo ++$i; ?>
-                            <input type="hidden" name="id" class="hide" value="<?php echo $item->id; ?>" />
-                        </td>
-                        <td>
-                            <span><?php echo $item->name; ?></span>
-                            <input type="text" name="name" class="hide input-mini" />
-                        </td>
-                        <td>
-                            <span><?php echo $item->price; ?></span>
-                            <input type="number" name="price" class="hide input-mini" />
-                        </td>
-                        <td>
-                            <a href="javascript:void(0);" class="edit btn">
-                                <i class="icon-edit"></i>
-                                编辑
-                            </a>
-                            <a href="javascript:void(0);" class="delete btn btn-danger <?php if ($item->is_delete) {
-        echo 'disappear';
-    } ?>">
-                                <i class="icon-trash icon-white"></i>
-                                删除
-                            </a>
-                            <a href="javascript:void(0);" class="recover btn btn-success <?php if (!$item->is_delete) {
-        echo 'disappear';
-    } ?>">
-                                <i class="icon-repeat icon-white"></i>
-                                恢复
-                            </a>
-                            <a href="javascript:void(0);" class="save btn btn-primary hide">
-                                <i class="icon-ok icon-white"></i>
-                                保存
-                            </a>
-                            <a href="javascript:void(0);" class="cancel btn hide">
-                                <i class="icon-remove"></i>
-                                取消
-                            </a>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+            <form class="form-horizontal">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>名称</th>
+                            <th>价格</th>
+                            <th width="140px">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $i = 0; ?>
+                        <?php foreach ($list as $item): ?>
+                        <tr>
+                            <td>
+                                <?php echo ++$i; ?>
+                                <input type="hidden" name="id" class="hide" value="<?php echo $item->id; ?>" />
+                            </td>
+                            <td>
+                                <span><?php echo $item->name; ?></span>
+                                <input type="text" name="name" class="hide input-small" />
+                            </td>
+                            <td>
+                                <span><?php echo $item->price; ?></span>
+                                <input type="number" name="price" class="hide input-small" />
+                            </td>
+                            <td>
+                                <a href="javascript:void(0);" class="edit btn btn-small">
+                                    <i class="icon-edit"></i>
+                                    编辑
+                                </a>
+                                <a href="javascript:void(0);" class="delete btn btn-small btn-danger <?php if ($item->is_delete) { echo 'disappear'; } ?>">
+                                    <i class="icon-trash icon-white"></i>
+                                    删除
+                                </a>
+                                <a href="javascript:void(0);" class="recover btn btn-small btn-success <?php if (!$item->is_delete) { echo 'disappear'; } ?>">
+                                    <i class="icon-repeat icon-white"></i>
+                                    恢复
+                                </a>
+                                <a href="javascript:void(0);" class="save btn btn-small btn-primary hide">
+                                    <i class="icon-ok icon-white"></i>
+                                    保存
+                                </a>
+                                <a href="javascript:void(0);" class="cancel btn btn-small hide">
+                                    <i class="icon-remove"></i>
+                                    取消
+                                </a>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </form>
         </div>
         <div class="tab-pane" id="add">
             <form action="/admin/goods/add" method="post">

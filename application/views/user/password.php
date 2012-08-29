@@ -6,7 +6,6 @@
             <input type="password" name="password" class="span6" placeholder="请输入密码...">
         </div>
     </div>
-    <br/>
     <div class="form-actions">
         <input type="submit" id="J_submit" class="btn btn-primary btn-large" value="登录" data-loading-text="登录中..." />
         <input type="hidden" name="submit" value="login"/>

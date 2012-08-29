@@ -42,8 +42,8 @@
                 <table width="100%">
                     <tr>
                         <td id="J_name"></td>
-                        <td width="110px"><span id="J_count">0</span>份总计：￥<span id="J_sum">0</span></td>
-                        <td width="65px">
+                        <td width="120px"><span id="J_count">0</span>份总计：￥<span id="J_sum">0</span></td>
+                        <td width="75px">
                             <input id="J_order" type="submit" class="btn pull-right order" value="下订单"/>
                             <input id="J_ids" type="hidden" name="ids" />
                         </td>
