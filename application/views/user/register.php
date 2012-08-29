@@ -1,28 +1,6 @@
 <?php include_once (APPPATH . 'views/common/header.php'); ?>
 <form method="post">
     <div class="control-group">
-        <label class="control-label"><h4>姓名：</h4></label>
-        <div class="controls">
-            <input type="text" name="name" class="span6" placeholder="请输入姓名..." value="<?php echo isset($name) ? $name : ''; ?>" />
-        </div>
-    </div>
-    <br/>
-    <div class="control-group">
-        <label class="control-label"><h4>地址：</h4></label>
-        <div class="controls">
-            航天部大院，<input type="hidden" name="one" value="航天部大院"/>
-            <select name="two" class="input-small">
-                <option value="1号楼" <?php if (isset($two) && $two == '1号楼') echo 'selected'; ?>>1号楼</option>
-                <option value="2号楼" <?php if (isset($two) && $two == '2号楼') echo 'selected'; ?>>2号楼</option>
-                <option value="3号楼" <?php if (isset($two) && $two == '3号楼') echo 'selected'; ?>>3号楼</option>
-                <option value="4号楼" <?php if (isset($two) && $two == '4号楼') echo 'selected'; ?>>4号楼</option>
-                <option value="5号楼" <?php if (isset($two) && $two == '5号楼') echo 'selected'; ?>>5号楼</option>
-            </select>
-            <input type="text" name="three" class="span6" placeholder="请输入具体科室..." value="<?php echo isset($threee) ? $three : ''; ?>" />
-        </div>
-    </div>
-    <br/>
-    <div class="control-group">
         <label class="control-label">设置密码</label>
         <div class="controls">
             <input type="password" name="password1" class="span6" placeholder="请输入...">

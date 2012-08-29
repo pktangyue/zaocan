@@ -16,10 +16,6 @@ class Register extends Base {
         if (!$this->input->post('submit') == 'register') {
             return;
         }
-        $this->params['name'] = $name = $this->input->post('name');
-        $this->params['one'] = $one = $this->input->post('one');
-        $this->params['two'] = $two = $this->input->post('two');
-        $this->params['three'] = $three = $this->input->post('three');
         $password1 = $this->input->post('password1');
         $password2 = $this->input->post('password2');
         if ($password1 != $password2) {
@@ -27,14 +23,12 @@ class Register extends Base {
             return;
         }
         $this->load->model('user_model');
-        $this->load->model('address_model');
         $phone = get_cookie('user_phone', true);
-        $uid = $this->user_model->add_user($name, $phone, $password1);
+        $uid = $this->user_model->add_user($phone, $password1);
         if (!$uid) {
             $this->params['error'] = '已经存在的手机号';
             return;
         }
-        $this->address_model->add_address($uid, $one, $two, $three);
         $this->set_logined_with_phone($phone);
         $this->set_auto_login_cookies($phone);
         redirect('/cart');

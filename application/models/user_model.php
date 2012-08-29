@@ -14,13 +14,12 @@ class User_model extends CI_Model {
         return $this->db->count_all_results() == 0 ? False : True;
     }
     
-    public function add_user($name, $phone, $password, $is_register = true) {
+    public function add_user($phone, $password, $is_register = true) {
         if ($this->get_user($phone)) {
             return;
         }
         $this->load->helper('security');
         $this->db->insert($this->table, array(
-            'name' => $name,
             'phone' => $phone,
             'password' => do_hash($password, 'md5') ,
             'is_register' => $is_register
