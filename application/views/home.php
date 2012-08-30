@@ -45,7 +45,7 @@
                         <td width="120px"><span id="J_count">0</span>份总计：￥<span id="J_sum">0</span></td>
                         <td width="75px">
                             <input id="J_order" type="submit" class="btn pull-right order" value="下订单"/>
-                            <input id="J_ids" type="hidden" name="ids" />
+                            <input id="J_cart" type="hidden" name="cart" />
                         </td>
                     </tr>
                 </table>
@@ -60,31 +60,41 @@ $(function(){
     var $J_name = $('#J_name');
     var $J_count = $('#J_count');
     var $J_sum = $('#J_sum');
-    var $J_ids = $('#J_ids');
+    var $J_cart = $('#J_cart');
     $('table.goods').on('click','.btn',function(){
         var $this = $(this);
+        var id = $this.data('id');
+        for(var i = 0 ; i < orders.length ; i ++){
+            if(orders[i].id === id){
+                orders[i].number ++;
+                update_bar();
+                return;
+            }
+        }
         orders.push({
-            id : $this.data('id'),
+            id : id,
             name : $this.data('name'),
-            price : $this.data('price')
+            price : $this.data('price'),
+            number : 1
         });
         update_bar();
     });
     function update_bar(){
+        console.log(orders);
         if( orders.length > 0){
             $J_bottom.removeClass('hide').prev().css('margin-bottom',$J_bottom.height() + 10);
         }
-        var names = [],count = 0,price = 0,ids=[];
+        var names = [],count = 0,price = 0,cart=[];
         $.each(orders,function(i,v){
-            names.push(v.name);
-            ids.push(v.id);
-            count ++;
-            price += v.price;
+            names.push(v.name + (v.number > 1 ? '(' + v.number + ')' : '' ));
+            count += v.number;
+            price += v.price * v.number;
+            cart.push(v.id + ':' + v.number);
         });
         $J_name.html(names.join('/'));
         $J_count.html(count);
         $J_sum.html(price);
-        $J_ids.val(ids.join(';'));
+        $J_cart.val(cart.join(';'));
     };
 });
 </script>

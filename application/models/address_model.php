@@ -16,4 +16,14 @@ class Address_model extends CI_Model {
         $row = $this->db->get($this->table)->row();
         return $row ? $row->id : '';
     }
+    
+    public function get_current_address($uid = '') {
+        if (!$uid) {
+            return;
+        }
+        return $this->db->get_where($this->table, array(
+            'uid' => $uid,
+            'is_current' => true
+        ))->row();
+    }
 }
