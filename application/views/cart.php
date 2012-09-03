@@ -36,8 +36,12 @@
     </table>
 </form>
 <?php if (isset($address) && $address): ?>
+<p>收货地址：</p>
+<p><?php echo $address->one; ?>，<?php echo $address->two; ?>，<?php echo $address->three; ?></p>
+<p>收货人：</p>
+<p><?php echo $address->name; ?></p>
 <?php else: ?>
-<a href="" class="btn span6">去设置一个收货地址</a>
+<a href="/address" class="btn span6">去设置一个收货地址</a>
 <?php endif; ?>
 <script>
 $(function(){

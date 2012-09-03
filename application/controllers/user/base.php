@@ -93,4 +93,8 @@ class Base extends CI_Controller {
         }
         return $user->name;
     }
+    
+    protected function set_back_btn($url = '/') {
+        $this->params['left_header_btn'] = '<a href="' . $url . '" class="pull-left btn"> <i class="icon-chevron-left"></i> 返回 </a>';
+    }
 }
