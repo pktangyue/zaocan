@@ -1,10 +1,10 @@
 <?php include_once (APPPATH . 'views/common/header.php'); ?>
-<?php if (isset($goods_list) && $goods_list): ?>
+<?php if (isset($cart_list) && $cart_list): ?>
 <style>
     .input-prepend .input-mini{width:40px;text-align:center;}
     .table td{line-height:28px;}
 </style>
-<form class="form-horizontal" action="/order" method="post">
+<form class="form-horizontal" action="/order/add" method="post">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -15,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($goods_list as $i => $goods): ?>
+            <?php foreach ($cart_list as $i => $goods): ?>
             <tr>
                 <td><input type="hidden" name="cart[<?php echo $i; ?>][id]" value="<?php echo $goods->id; ?>"><?php echo $goods->name; ?></td>
                 <td class="tc">
@@ -30,7 +30,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <th colspan="4" class="tr">合计：￥<span id="J_total"><?php echo $total_price; ?></span></th>
+                <th colspan="4" class="tr">合计：￥<span id="J_total"></span></th>
             </tr>
         </tfoot>
     </table>
@@ -60,9 +60,10 @@ $(function(){
     var cart = {};
     var $J_total = $('#J_total');
 
-    <?php foreach ($goods_list as $goods): ?>
-    cart[<?php echo $goods->id; ?>] = {number : <?php echo $goods->number; ?>, price : <?php echo $goods->price; ?>};
+    <?php foreach ($cart_list as $goods): ?>
+    cart[<?php echo $goods->id; ?>] = {name : '<?php echo $goods->name; ?>', number : <?php echo $goods->number; ?>, price : <?php echo $goods->price; ?>};
     <?php endforeach; ?>
+    update_total_price();
 
     function update_cart( id , number ){
         cart[id]['number'] = number;
@@ -81,6 +82,15 @@ $(function(){
             $('form').hide();
         }
     }
+    function save_cart(){
+        var arr = [];
+        $.each(cart, function(key,value){
+            arr.push(key + ':' + value.number);
+        });
+        $.post('/cart/save',{ cart : arr.join(';') },function(result){
+            result ?  alert(result) : '';
+        });
+    }
     $('.minus,.plus').click(function(){
         var $tr = $(this).closest('tr');
         var $input = $tr.find('input[type="text"]');
@@ -97,6 +107,7 @@ $(function(){
         $input.val( num );
         $tr.find('.price').html(cart[id].number * cart[id].price);
         update_total_price();
+        save_cart();
     });
     $('.delete').click(function(){
         if(!confirm('确定删除此商品？')){
@@ -107,9 +118,10 @@ $(function(){
         delete_goods(id);
         $tr.remove();
         update_total_price();
+        save_cart();
     });
 });
 </script>
 <?php endif; ?>
-<p id="J_none" class="<?php echo isset($goods_list) && $goods_list ? 'hide' : ''; ?>">你还没有选择任何产品，回<a href="/">首页</a>选择产品</p>
+<p id="J_none" class="<?php echo isset($cart_list) && $cart_list ? 'hide' : ''; ?>">你还没有选择任何产品，回<a href="/">首页</a>选择产品</p>
 <?php include_once (APPPATH . 'views/common/footer.php'); ?>

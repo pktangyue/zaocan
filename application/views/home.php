@@ -38,63 +38,65 @@
 <div id="J_bottom" class="navbar navbar-fixed-bottom hide">
     <div class="navbar-inner">
         <div class="container">
-            <form action="/cart" method="post">
-                <table width="100%">
-                    <tr>
-                        <td id="J_name"></td>
-                        <td width="120px"><span id="J_count">0</span>份总计：￥<span id="J_sum">0</span></td>
-                        <td width="75px">
-                            <input id="J_order" type="submit" class="btn pull-right order" value="下订单"/>
-                            <input id="J_cart" type="hidden" name="cart" />
-                        </td>
-                    </tr>
-                </table>
-            </form>
+            <table width="100%">
+                <tr>
+                    <td id="J_name"></td>
+                    <td width="120px"><span id="J_count">0</span>份总计：￥<span id="J_sum">0</span></td>
+                    <td width="75px">
+                        <a href="/cart" class="btn pull-right order">下订单</a>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
 <script>
 $(function(){
-    var orders = [];
+    var orders = {};
     var $J_bottom = $('#J_bottom');
     var $J_name = $('#J_name');
     var $J_count = $('#J_count');
     var $J_sum = $('#J_sum');
-    var $J_cart = $('#J_cart');
+
+    <?php if (isset($cart_list) && $cart_list): ?>
+    <?php foreach ($cart_list as $goods): ?>
+    orders[<?php echo $goods->id; ?>] = {name : '<?php echo $goods->name; ?>', number : <?php echo $goods->number; ?>, price : <?php echo $goods->price; ?>};
+    <?php endforeach; ?>
+    update_bar();
+    <?php endif; ?>
+
     $('table.goods').on('click','.btn',function(){
         var $this = $(this);
         var id = $this.data('id');
-        for(var i = 0 ; i < orders.length ; i ++){
-            if(orders[i].id === id){
-                orders[i].number ++;
-                update_bar();
-                return;
-            }
+        if( !orders[id] ){
+            orders[id] = {
+                name : $this.data('name'),
+                price : $this.data('price'),
+                number : 1
+            };
         }
-        orders.push({
-            id : id,
-            name : $this.data('name'),
-            price : $this.data('price'),
-            number : 1
-        });
+        else{
+            orders[id]['number'] ++;
+        }
         update_bar();
     });
     function update_bar(){
-        console.log(orders);
-        if( orders.length > 0){
+        if( Object.keys(orders).length > 0){
             $J_bottom.removeClass('hide').prev().css('margin-bottom',$J_bottom.height() + 10);
         }
         var names = [],count = 0,price = 0,cart=[];
-        $.each(orders,function(i,v){
-            names.push(v.name + (v.number > 1 ? '(' + v.number + ')' : '' ));
-            count += v.number;
-            price += v.price * v.number;
-            cart.push(v.id + ':' + v.number);
+        $.each(orders,function(key,value){
+            names.push(value.name + (value.number > 1 ? ' *' + value.number : '' ));
+            count += value.number;
+            price += value.price * value.number;
+            cart.push(key + ':' + value.number);
         });
         $J_name.html(names.join('/'));
         $J_count.html(count);
         $J_sum.html(price);
-        $J_cart.val(cart.join(';'));
+        $.post('/cart/save',{ cart : cart.join(';') },function(result){
+            result ?  alert(result) : '';
+        });
     };
 });
 </script>

@@ -63,6 +63,9 @@ class Goods_model extends CI_Model {
     }
     
     public function get_goods_by_ids($ids = array()) {
+        if (!$ids) {
+            return array();
+        }
         $this->db->select('id,name,price')->where('is_delete', false);
         $this->db->where_in('id', $ids);
         return $this->db->get($this->table)->result();
