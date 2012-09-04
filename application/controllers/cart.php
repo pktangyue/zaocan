@@ -8,6 +8,7 @@ class Cart extends Base {
         $this->check_login();
         $this->_get_cart();
         $this->_get_current_address();
+        $this->params['user_phone'] = $this->get_user_phone();
         $this->params['title'] = '确定订单';
         $this->loadview->path('cart', $this->params);
     }
