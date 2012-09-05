@@ -14,4 +14,12 @@ class Orders_model extends CI_Model {
         $row = $this->db->get($this->table)->row();
         return $row ? $row->id : '';
     }
+    
+    public function get_list($uid, $status = 'waiting') {
+        $this->db->order_by('create_time', 'desc');
+        return $this->db->get_where($this->table, array(
+            'uid' => $uid,
+            'status' => $status
+        ))->result();
+    }
 }

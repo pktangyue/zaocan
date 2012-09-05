@@ -9,6 +9,29 @@ class Order extends Base {
     }
     
     public function index() {
+        $this->load->model('orders_model');
+        $this->params['waiting_orders'] = $this->orders_model->get_list($this->get_user_id() , 'waiting');
+        $this->params['completed_orders'] = $this->orders_model->get_list($this->get_user_id() , 'completed');
+        $this->params['title'] = '我的订单';
+        $this->loadview->path('order', $this->params);
+    }
+    
+    public function detail($id = '') {
+        if (!$id) {
+            show_404();
+            return;
+        }
+        $this->load->model('orders_detail_model');
+        $this->load->model('address_model');
+        $orders_detail = $this->orders_detail_model->get_detail($id);
+        $aid = $orders_detail ? $orders_detail[0]->aid : '';
+        $this->params['address'] = $this->address_model->get_address_by_id($aid);
+        $this->params['orders_detail'] = $orders_detail;
+        $this->params['user_phone'] = $this->get_user_phone();
+        $this->params['total_price'] = $orders_detail ? $orders_detail[0]->total_price : 0.00;
+        $this->params['title'] = '订单详情';
+        $this->set_back_btn('/order');
+        $this->loadview->path('order/detail', $this->params);
     }
     
     public function add() {
