@@ -5,11 +5,11 @@ class Cart extends Base {
     
     public function __construct() {
         parent::__construct();
-        $this->check_login();
         $this->load->library('cartinfo');
     }
     
     public function index() {
+        $this->check_login();
         $this->load->model('address_model');
         $this->params['address'] = $this->address_model->get_current_address($this->get_user_id());
         $this->params['cart_list'] = $this->cartinfo->get_list();
