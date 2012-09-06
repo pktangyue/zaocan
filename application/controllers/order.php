@@ -13,6 +13,7 @@ class Order extends Base {
         $this->params['waiting_orders'] = $this->orders_model->get_list($this->get_user_id() , 'waiting');
         $this->params['completed_orders'] = $this->orders_model->get_list($this->get_user_id() , 'completed');
         $this->params['title'] = '我的订单';
+        $this->set_home_btn();
         $this->loadview->path('order', $this->params);
     }
     

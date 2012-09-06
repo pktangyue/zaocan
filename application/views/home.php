@@ -1,4 +1,8 @@
 <?php include_once (APPPATH . 'views/common/header.php'); ?>
+<style>
+    .navbar .btn-navbar{margin-right:10px;}
+    .popover{width:90px;}
+</style>
 <p>无需排队，熟悉的味道到你手。</p>
 <p>此次早餐将于明日8：00送出。</p>
 <?php foreach ($list as $goods): ?>
@@ -98,6 +102,11 @@ $(function(){
             result ?  alert(result) : '';
         });
     };
+    $('#J_nav').popover({
+        placement : 'bottom',
+        title : '<a href="/order">我的订单</a>',
+        content : '<a href="/address">收货地址</a>'
+    });
 });
 </script>
 <?php include_once (APPPATH . 'views/common/footer.php'); ?>

@@ -8,6 +8,9 @@ class Home extends Base {
         $this->params['title'] = '订餐首页';
         $this->params['cart_list'] = $this->cartinfo->get_list();
         $this->params['list'] = $this->_get_home_goods();
+        if ($this->is_logined()) {
+            $this->params['right_header_btn'] = '<a id="J_nav" class="btn btn-navbar pull-right" rel="popover"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>';
+        }
         $this->loadview->path('home', $this->params);
     }
     

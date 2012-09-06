@@ -14,6 +14,7 @@ class Address extends Base {
         $this->_set_back_url();
         $this->params['title'] = '收货地址';
         $this->params['address_list'] = $this->address_model->get_address_list($this->get_user_id());
+        $this->set_home_btn();
         $this->loadview->path('address', $this->params);
     }
     
