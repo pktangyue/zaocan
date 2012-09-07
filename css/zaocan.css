@@ -1,0 +1,20 @@
+/*navbar-fixed-top*/
+.navbar-fixed-top .container{text-align:center;}
+.navbar-fixed-top .brand{float:none;}
+.navbar-fixed-top .pull-left{position:absolute;left:20px;}
+.navbar-fixed-top .pull-right{position:absolute;right:20px;}
+/*navbar-fixed-bottom*/
+.navbar-fixed-bottom{position:fixed;margin-left:0;margin-right:0;}
+.navbar-fixed-bottom td{vertical-align:bottom;padding:5px 10px 5px 0;}
+.navbar-fixed-bottom .order{margin-top:0;}
+.navbar-fixed-bottom form{margin-bottom:0;}
+/*table*/
+.table .tc{text-align:center;}
+.table .tr{text-align:right;}
+/*goods*/
+.goods{width:100%;}
+.goods td{text-align:center;}
+.goods li{text-align:left;font-size:14px;}
+.goods .name{font-weight:bolder;font-size:20px;}
+.goods .price{color:#9d261d;}
+.goods .num{font-weight:bold;}
