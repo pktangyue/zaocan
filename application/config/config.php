@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://codeigniter.tangyue.com';
+$config['base_url']	= 'http://zaocan.sinaapp.com';
 
 /*
 |--------------------------------------------------------------------------
