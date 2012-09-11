@@ -62,7 +62,9 @@
 $(function(){
     $('td').click(function(){
         var id = $(this).data('id');
-        document.location.href = '/order/detail/'+id;
+        if(id){
+            document.location.href = '/order/detail/'+id;
+        }
     });
 });
 </script>
