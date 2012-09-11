@@ -23,6 +23,12 @@ class Cart extends Base {
         if (!$this->input->is_ajax_request()) {
             return;
         }
-        $this->cartinfo->save($this->input->post('cart'));
+        $cart = $this->input->post('cart');
+        if ($cart) {
+            $this->cartinfo->save($cart);
+        }
+        else {
+            $this->cartinfo->delete();
+        }
     }
 }
