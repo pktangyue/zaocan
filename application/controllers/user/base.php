@@ -95,10 +95,16 @@ class Base extends CI_Controller {
     }
     
     protected function set_back_btn($url = '/') {
+        if (!$url) {
+            $url = '/';
+        }
         $this->params['left_header_btn'] = '<a href="' . $url . '" class="pull-left btn"> <i class="icon-chevron-left"></i> 返回 </a>';
     }
     
     protected function set_home_btn($url = '/') {
+        if (!$url) {
+            $url = '/';
+        }
         $this->params['right_header_btn'] = '<a href="' . $url . '" class="pull-right btn"> <i class="icon-home"></i> </a>';
     }
 }
