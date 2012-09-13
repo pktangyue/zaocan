@@ -3,13 +3,13 @@
     <div class="control-group">
         <label class="control-label">设置密码</label>
         <div class="controls">
-            <input type="password" name="password1" class="span6" placeholder="请输入...">
+            <input type="password" name="password1" class="span12" placeholder="请输入...">
         </div>
     </div>
     <div class="control-group">
         <label class="control-label">重复密码</label>
         <div class="controls">
-            <input type="password" name="password2" class="span6" placeholder="请输入...">
+            <input type="password" name="password2" class="span12" placeholder="请输入...">
         </div>
     </div>
     <div class="form-actions">
