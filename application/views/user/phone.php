@@ -3,7 +3,7 @@
     <div class="control-group">
         <label class="control-label">手机号：</label>
         <div class="controls">
-            <input type="text" name="phone" class="span6" placeholder="请输入手机号..." value="<?php echo isset($phone) ? $phone : ''; ?>" />
+            <input type="text" name="phone" class="span12" placeholder="请输入手机号..." value="<?php echo isset($phone) ? $phone : ''; ?>" />
         </div>
     </div>
     <div class="form-actions">

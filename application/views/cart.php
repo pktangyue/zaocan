@@ -50,7 +50,7 @@
     <div id="J_bottom" class="navbar navbar-fixed-bottom">
         <div class="navbar-inner">
             <div class="container">
-                <input type="submit" class="btn pull-right order <?php echo isset($address) && $address ? '':'disabled'; ?>" value="确定" <?php echo isset($address) && $address ? '':'disabled'; ?>/>
+                <input type="submit" class="btn pull-right <?php echo isset($address) && $address ? '':'disabled'; ?>" value="确定" <?php echo isset($address) && $address ? '':'disabled'; ?>/>
             </div>
         </div>
     </div>

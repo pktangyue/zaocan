@@ -21,7 +21,7 @@
             </td>
         </tr>
         <tr>
-            <td>
+            <td width="33%">
                 <div class="price">￥<?php echo $goods->price; ?></div>
                 <div><?php if ($goods->is_set): ?>套餐价格<?php else: ?>价格<?php endif; ?></div>
             </td>
@@ -29,7 +29,7 @@
                 <div class="num">200</div>
                 <div>本周销量</div>
             </td>
-            <td>
+            <td width="33%">
                 <a  data-id="<?php echo $goods->id; ?>"
                     data-name="<?php echo $goods->name; ?>"
                     data-price="<?php echo $goods->price; ?>"
@@ -47,7 +47,7 @@
                     <td id="J_name"></td>
                     <td width="120px"><span id="J_count">0</span>份总计：￥<span id="J_sum">0</span></td>
                     <td width="75px">
-                        <a href="/cart" class="btn pull-right order">下订单</a>
+                        <a href="/cart" class="btn pull-right">下订单</a>
                     </td>
                 </tr>
             </table>

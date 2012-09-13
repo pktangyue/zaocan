@@ -5,8 +5,7 @@
 .navbar-fixed-top .pull-right{position:absolute;right:20px;}
 /*navbar-fixed-bottom*/
 .navbar-fixed-bottom{position:fixed;margin-left:0;margin-right:0;}
-.navbar-fixed-bottom td{vertical-align:bottom;padding:5px 10px 5px 0;}
-.navbar-fixed-bottom .order{margin-top:0;}
+.navbar-fixed-bottom td{vertical-align:bottom;padding:0px 10px 5px 0;}
 .navbar-fixed-bottom form{margin-bottom:0;}
 /*table*/
 .table .tc{text-align:center;}
