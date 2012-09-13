@@ -3,7 +3,7 @@
     <div class="control-group">
         <label class="control-label">密码：</label>
         <div class="controls">
-            <input type="password" name="password" class="span6" placeholder="请输入密码...">
+            <input type="password" name="password" class="span12" placeholder="请输入密码...">
         </div>
     </div>
     <div class="form-actions">

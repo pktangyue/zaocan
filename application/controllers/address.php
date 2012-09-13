@@ -11,9 +11,9 @@ class Address extends Base {
     
     public function index() {
         $this->_handler_register();
-        $this->_set_back_url();
         $this->params['title'] = '收货地址';
         $this->params['address_list'] = $this->address_model->get_address_list($this->get_user_id());
+        $this->set_back_btn($this->agent->referrer());
         $this->set_home_btn();
         $this->loadview->path('address', $this->params);
     }
@@ -34,10 +34,5 @@ class Address extends Base {
         $this->params['two'] = $two = $this->input->post('two');
         $this->params['three'] = $three = $this->input->post('three');
         $this->address_model->add_address($this->get_user_id() , $name, $one, $two, $three);
-    }
-    
-    private function _set_back_url() {
-        $url = $this->agent->is_referral() ? $this->agent->referrer() : '/profile';
-        $this->set_back_btn($url);
     }
 }

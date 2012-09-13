@@ -4,13 +4,14 @@
     .well .icon-ok{position:absolute;right:5px;bottom:5px;display:none;}
     .alert-success .icon-ok{display:inline-block;}
 </style>
-<a id="J_new" href="javascript:void(0);" class="btn span6">添加收货地址</a>
+<a id="J_new" href="javascript:void(0);" class="btn span12" style="margin-left:0;">添加收货地址</a>
+<div class="clearfix"></div>
 <br/>
-<form class="form-horizontal <?php echo isset($address_list) && $address_list ? 'hide' : ''; ?>" method="post">
+<form class="<?php echo isset($address_list) && $address_list ? 'hide' : ''; ?>" method="post">
     <div class="control-group">
         <label class="control-label"><h4>姓名：</h4></label>
         <div class="controls">
-            <input type="text" name="name" class="span2" placeholder="请输入姓名..." value="<?php echo isset($name) ? $name : ''; ?>" />
+            <input type="text" name="name" class="span12" placeholder="请输入姓名..." value="<?php echo isset($name) ? $name : ''; ?>" />
         </div>
     </div>
     <div class="control-group">
@@ -24,7 +25,7 @@
                 <option value="4号楼" <?php if (isset($two) && $two == '4号楼') echo 'selected'; ?>>4号楼</option>
                 <option value="5号楼" <?php if (isset($two) && $two == '5号楼') echo 'selected'; ?>>5号楼</option>
             </select>
-            <input type="text" name="three" class="span2" placeholder="请输入具体科室..." value="<?php echo isset($threee) ? $three : ''; ?>" />
+            <input type="text" name="three" class="span12" placeholder="请输入具体科室..." value="<?php echo isset($threee) ? $three : ''; ?>" />
         </div>
     </div>
     <div class="form-actions">
