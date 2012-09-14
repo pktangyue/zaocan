@@ -2,4 +2,4 @@ name: pktangyue
 version: 2
 handle:
 - rewrite: if ( !is_dir() && !is_file() && path ~ "^(.*)$" ) goto "/index.php/$1"
-- hostaccess:  if(path ~ "db-scheme") deny "all"
+- hostaccess:  if(path ~ "db-scheme" || path ~ "application" || path ~ "system" ) deny "all"
