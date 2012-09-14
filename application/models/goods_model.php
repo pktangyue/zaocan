@@ -59,6 +59,7 @@ class Goods_model extends CI_Model {
         if ($query) {
             $this->db->like('name', $query);
         }
+        $this->db->order_by('is_set desc,id');
         return $this->db->get($this->table)->result();
     }
     

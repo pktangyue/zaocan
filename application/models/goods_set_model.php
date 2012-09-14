@@ -34,12 +34,19 @@ class Goods_set_model extends CI_Model {
         return $this->db->get($this->table)->result();
     }
     
+    public function get_all_detail() {
+        return $this->get_detail('all');
+    }
+    
     public function get_detail($pid) {
         if (!$pid) {
-            return;
+            return array();
         }
         $this->db->join($this->join_table, $this->table . '.cid = ' . $this->join_table . '.id');
-        $this->db->select('id,name,price,number')->where('pid', $pid)->where('number > 0');
+        $this->db->select('pid,cid,name,price,number')->where('number > 0');
+        if ($pid !== 'all') {
+            $this->db->where('pid', $pid);
+        }
         $this->db->where($this->join_table . '.is_delete', false);
         return $this->db->get($this->table)->result();
     }
