@@ -22,12 +22,12 @@
         </tr>
         <tr>
             <td width="33%">
-                <div class="price">￥<?php echo $goods->price; ?></div>
-                <div><?php if ($goods->is_set): ?>套餐价格<?php else: ?>价格<?php endif; ?></div>
+                <div class="num"><?php echo $goods->sales; ?></div>
+                <div>本周销量</div>
             </td>
             <td>
-                <div class="num">200</div>
-                <div>本周销量</div>
+                <div class="price">￥<?php echo $goods->price; ?></div>
+                <div><?php if ($goods->is_set): ?>套餐价格<?php else: ?>价格<?php endif; ?></div>
             </td>
             <td width="33%">
                 <a  data-id="<?php echo $goods->id; ?>"

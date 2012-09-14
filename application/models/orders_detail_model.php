@@ -24,4 +24,9 @@ class Orders_detail_model extends CI_Model {
         $this->db->select('aid,name,number,price,total_price')->where($this->join_table . '.id = ' . $id);
         return $this->db->get()->result();
     }
+    
+    public function get_all_sales() {
+        $this->db->select('gid,sum(number) as number')->group_by('gid');
+        return $this->db->get($this->table)->result();
+    }
 }
